@@ -1,19 +1,16 @@
 import json
-
-
-file_path = "operations.json"
+data_json = "operations.json"
 
 
 def read_json_file(file_path):
-
     """
-        Читает данные из файла JSON.
+    Читает данные из файла JSON.
 
-        Аргументы:
-        file_path (str): Путь к файлу JSON.
+    Аргументы:
+    file_path (str): Путь к файлу JSON.
 
-        Возвращает:
-        dict: Содержимое файла JSON в виде словаря.
+    Возвращает:
+    dict: Содержимое файла JSON в виде словаря.
     """
 
 
@@ -23,26 +20,28 @@ def read_json_file(file_path):
 
     return data
 
-# print(read_json_file(data_json)["id"])
+# print(read_json_file(data_json)[1])
 
 
-def mask_card_number(card_number, account_number):
-
-    """
-    Функция маскирует номер карты
-    card_number - передается по номеру содержимое Json файла после прочтения
-    (предворительно номер карты)
-    """
-    masked_kard_number = "{} XX** **** {}".format(card_number[:6], card_number[-4:])
-
-    """
-    Функция маскирует номер счета
-    account_number - передается по номеру содержимое Json файла после прочтения
-    (предворительно номер счета)
-    """
-
-    masked_number = "**{}".format(account_number[-4:])
-    return masked_number, masked_kard_number
+# def mask_card_number(card_number, account_number):
+#
+#     """
+#     Функция маскирует номер карты
+#     card_number - передается по номеру содержимое Json файла после прочтения
+#     (предворительно номер карты)
+#     """
+#     masked_kard_number = "{} XX** **** {}".format(card_number[:6], card_number[-4:])
+#
+#     """
+#     Функция маскирует номер счета
+#     account_number - передается по номеру содержимое Json файла после прочтения
+#     (предворительно номер счета)
+#     """
+#
+#     masked_number = "**{}".format(account_number[-4:])
+#
+#
+#     return masked_number, masked_kard_number
 
 
 # def range_number(file_path):
