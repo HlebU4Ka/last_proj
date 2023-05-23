@@ -1,16 +1,32 @@
-from units import read_json_file,  mask_card_number, file_path
-
+from units import read_json_file, data_json
+from datetime import datetime
+def mask_number(sub):
+    my_list = sub.split(" ") # Массив из слов
+    card_number = my_list[-1] # Последние цифры
+    if (my_list[0] != "Счет"):
+        card_number = card_number[:6] + "*" * 6 + card_number[12:]
+        # TODO: Разбить по 4, вставить пробелы между ними
+    else:
+        card_number = "**" + card_number[-4:]
+    my_list[-1] = card_number
+    return " ".join(my_list)
 def main():
-    """
-- Последние 5 выполненных (EXECUTED) операций выведены на экран.
-- Операции разделены пустой строкой.
-- Дата перевода представлена в формате ДД.ММ.ГГГГ (пример: 14.10.2018).
-- Сверху списка находятся самые последние операции (по дате).
-Функции ниже реализовал
-- Номер карты замаскирован и не отображается целиком в формате  XXXX XX** **** XXXX (видны первые 6 цифр и последние 4, разбито по блокам по 4 цифры, разделенных пробелом).
-- Номер счета замаскирован и не отображается целиком в формате  **XXXX
-(видны только последние 4 цифры номера счета).
-    """
-    for date in read_json_file(file_path):
-        if key in range(1, 5):
-            print(key)
+    json_file = read_json_file(data_json)
+    json_file = [d for d in json_file if 'state' in d and d['state'] == 'EXECUTED']
+    json_file = sorted(json_file, key= lambda x: x.get('date', ''), reverse=True)
+    for i in range(0, 5):
+        my_date = json_file[i]['date']
+        format_date = datetime.fromisoformat(my_date).strftime('%d.%m.%Y')
+        print(format_date, end=" ")
+        print(json_file[i]['description'])
+        if json_file[i].get('from') is not None:
+            print(mask_number(json_file[i]['from']), end=" -> ")
+        print(mask_number(json_file[i]['to']))
+        print(json_file[i]['operationAmount']['amount'] + " " + json_file[i]['operationAmount']['currency']['name'])
+        print()
+main()
+
+
+
+
+
