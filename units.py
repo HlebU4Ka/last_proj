@@ -1,7 +1,11 @@
 import json
-data_json = "operations.json"
+
+
+file_path = "operations.json"
+
 
 def read_json_file(file_path):
+
     """
         Читает данные из файла JSON.
 
@@ -16,7 +20,10 @@ def read_json_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
 
         data = json.load(file)
+
     return data
+
+# print(read_json_file(data_json)["id"])
 
 
 def mask_card_number(card_number, account_number):
@@ -36,3 +43,12 @@ def mask_card_number(card_number, account_number):
 
     masked_number = "**{}".format(account_number[-4:])
     return masked_number, masked_kard_number
+
+
+# def range_number(file_path):
+#     for key in range(1, 5):
+#         value = read_json_file(file_path)[key]
+#
+#     return value
+#
+# print(range_number)
