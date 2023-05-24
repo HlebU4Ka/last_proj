@@ -3,9 +3,6 @@ from datetime import datetime
 
 def main():
 
-    """
-
-    """
     json_file = read_json_file(data_json)
     """
     Функция фильтрации по ключу = 'EXECUTED'

@@ -47,4 +47,3 @@ def mask_number(sub):
     my_list[-1] = card_number
     return " ".join(my_list)
 
-
