@@ -20,34 +20,31 @@ def read_json_file(file_path):
 
     return data
 
-# print(read_json_file(data_json)[1])
 
 
-# def mask_card_number(card_number, account_number):
-#
-#     """
-#     Функция маскирует номер карты
-#     card_number - передается по номеру содержимое Json файла после прочтения
-#     (предворительно номер карты)
-#     """
-#     masked_kard_number = "{} XX** **** {}".format(card_number[:6], card_number[-4:])
-#
-#     """
-#     Функция маскирует номер счета
-#     account_number - передается по номеру содержимое Json файла после прочтения
-#     (предворительно номер счета)
-#     """
-#
-#     masked_number = "**{}".format(account_number[-4:])
-#
-#
-#     return masked_number, masked_kard_number
+def mask_number(sub):
+    """
+    Замаскировать номер карты.
+
+    Разбивает входную строку на слова, извлекает последнее слово (номер карты),
+    и замаскированный номер карты возвращается в заданном формате.
+
+    Параметры:
+    - sub (str): Входная строка, содержащая номер карты.
+
+    Возвращает:
+    str: Замаскированный номер карты.
+
+    """
+    my_list = sub.split(" ") # Массив из слов
+    card_number = my_list[-1] # Последние цифры
+    if (my_list[0] != "Счет"):
+        # card_number = card_number[:6] + "*" * 6 + card_number[12:]
+        card_number = card_number[:4] + " " + card_number[:2] + "** ****" + " " + card_number[-4:]
+
+    else:
+        card_number = "**" + card_number[-4:]
+    my_list[-1] = card_number
+    return " ".join(my_list)
 
 
-# def range_number(file_path):
-#     for key in range(1, 5):
-#         value = read_json_file(file_path)[key]
-#
-#     return value
-#
-# print(range_number)
