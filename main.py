@@ -4,8 +4,9 @@ def mask_number(sub):
     my_list = sub.split(" ") # Массив из слов
     card_number = my_list[-1] # Последние цифры
     if (my_list[0] != "Счет"):
-        card_number = card_number[:6] + "*" * 6 + card_number[12:]
-        # TODO: Разбить по 4, вставить пробелы между ними
+        # card_number = card_number[:6] + "*" * 6 + card_number[12:]
+        card_number = card_number[:4] + " " + card_number[:2] + "** ****" + " " + card_number[-4:]
+
     else:
         card_number = "**" + card_number[-4:]
     my_list[-1] = card_number
@@ -13,7 +14,7 @@ def mask_number(sub):
 def main():
     json_file = read_json_file(data_json)
     json_file = [d for d in json_file if 'state' in d and d['state'] == 'EXECUTED']
-    json_file = sorted(json_file, key= lambda x: x.get('date', ''), reverse=True)
+    json_file = sorted(json_file, key=lambda x: x.get('date', ''), reverse=True)
     for i in range(0, 5):
         my_date = json_file[i]['date']
         format_date = datetime.fromisoformat(my_date).strftime('%d.%m.%Y')
