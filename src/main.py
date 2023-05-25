@@ -8,6 +8,7 @@ def main():
     Функция фильтрации по ключу = 'EXECUTED'
     """
     json_file = [d for d in json_file if 'state' in d and d['state'] == 'EXECUTED']
+
     """
     Функция фильтрации по ключу = 'date'. Выбирается самая последняя дата через цикл. Выводится 5 первых операций.
     """
@@ -28,6 +29,7 @@ def main():
         """
         print(json_file[i]['operationAmount']['amount'] + " " + json_file[i]['operationAmount']['currency']['name'])
         print()
+
 main()
 
 
